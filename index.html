@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres ser mi San Valentín?</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: #ffebf0;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            position: relative;
+            animation: backgroundChange 10s infinite alternate;
+        }
+
+        /* Efecto de cambio de fondo */
+        @keyframes backgroundChange {
+            0% { background-color: #ffebf0; }
+            50% { background-color: #ff99cc; }
+            100% { background-color: #ff4081; }
+        }
+
+        h1 {
+            color: #d6336c;
+            margin-top: 20px;
+            font-size: 30px;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid #d6336c;
+            width: 0;
+            animation: typing 3s steps(30, end) forwards, blink 0.7s infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        .heart {
+            font-size: 50px;
+            animation: heartbeat 1s infinite alternate;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .heart:hover {
+            transform: scale(1.5);
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.2); }
+        }
+
+        .images {
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .images img {
+            width: 80%;
+            max-width: 250px;
+            height: auto;
+            border-radius: 10px;
+            margin: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out, opacity 1s ease-in-out;
+        }
+
+        .images img:hover {
+            transform: scale(1.1);
+            opacity: 0.8;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            border-radius: 5px;
+        }
+
+        .yes {
+            background-color: #ff4081;
+            color: white;
+            animation: bounce 1s infinite;
+        }
+
+        .yes:hover {
+            background-color: #e91e63;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .no {
+            background-color: #ccc;
+            color: black;
+            position: absolute;
+            animation: moveButton 2s infinite alternate;
+        }
+
+        @keyframes moveButton {
+            0% { left: 10%; top: 10%; }
+            50% { left: 80%; top: 20%; }
+            100% { left: 10%; top: 90%; }
+        }
+
+        .fade-out {
+            animation: fadeOut 1.5s ease-in-out forwards;
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        .heart-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .heart-bg div {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: rgba(255, 0, 102, 0.5);
+            clip-path: polygon(50% 0%, 100% 35%, 80% 100%, 20% 100%, 0% 35%);
+            animation: float 5s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            from { transform: translateY(100vh) scale(0.5); }
+            to { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+        }
+
+        .love-message {
+            font-size: 24px;
+            color: #d6336c;
+            max-width: 600px;
+            margin: 20px auto;
+            opacity: 0;
+            animation: fadeIn 3s ease-in-out forwards;
+        }
+
+        .refran {
+            font-size: 20px;
+            color: #ff4081;
+            font-style: italic;
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeInRefran 3s ease-in-out forwards;
+        }
+
+        @keyframes fadeInRefran {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Media Queries para hacer la página más responsiva */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 24px;
+            }
+            .heart {
+                font-size: 40px;
+            }
+            .images img {
+                width: 70%;
+                max-width: 200px;
+            }
+            .love-message {
+                font-size: 18px;
+            }
+            .btn {
+                padding: 12px 25px;
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 20px;
+            }
+            .heart {
+                font-size: 35px;
+            }
+            .images img {
+                width: 90%;
+                max-width: 150px;
+            }
+            .love-message {
+                font-size: 16px;
+            }
+            .btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="audioPlayer" loop>
+        <source src="musica/romantica.mp3" type="audio/wav">
+        Tu navegador no soporta el audio.
+    </audio>
+    <button onclick="document.getElementById('audioPlayer').play()">Reproducir Música</button>
+
+    <div class="heart-bg"></div>
+
+    <h1>¿Quieres ser mi San Valentín? <span class="heart">❤️</span></h1>
+
+    <div class="images">
+        <img src="imagenes/tu-foto1.jpg" alt="Nosotros juntos">
+        <img src="imagenes/tu-foto2.jpg" alt="Un lindo recuerdo">
+    </div>
+
+    <div class="buttons">
+        <button class="btn yes" onclick="showMessage()">Sí</button>
+        <button class="btn no" onmouseover="moveButton()">No</button>
+    </div>
+
+    <script>
+        const refranes = [
+            "El amor no tiene cura, pero es la única medicina para todos los males.",
+            "Amar no es mirarse el uno al otro; es mirar juntos en la misma dirección.",
+            "Donde hay amor, hay vida.",
+            "El amor es la respuesta, pero mientras esperas la respuesta, el sexo plantea unas preguntas bastante buenas.",
+            "Te amo no solo por cómo eres, sino por cómo soy yo cuando estoy contigo.",
+            "El amor verdadero no es perfecto, es real.",
+            "Amar es vivir, y vivir es amar.",
+            "El amor es la cosa más cercana a la magia que existe."
+        ];
+
+        function getRandomRefran() {
+            const randomIndex = Math.floor(Math.random() * refranes.length);
+            return refranes[randomIndex];
+        }
+
+        function showMessage() {
+            document.body.innerHTML = `
+                <h1>¡Sabía que dirías que sí! ❤️</h1>
+                <h2>Eres el amor de mi vida</h2>
+                <img src="imagenes/tu-foto1.jpg" style="width:300px; border-radius:10px;">
+                <p class="love-message">Mi amorcito este es nuestro segundo san valentin pero quiero que sea el primero de muchos donde podamos disfrutar el uno del otro de una manera diferente y especial aunque este año no podra ser lleno de regalos y cosas caras no te faltara nunca el amor ni el cariño que te daré, amo cada parte de ti eres y seras lo mejor que me ha pasado en la vida. Te Amooooooo como no sabes por siempre y para siempre 💖</p>
+                <p class="refran" id="refran">${getRandomRefran()}</p>
+                <div class="heart-bg"></div>
+            `;
+            createHearts();
+            startRefranChange();  // Comienza a cambiar los refranes cada 5 segundos
+        }
+
+        function moveButton() {
+            let btnNo = document.querySelector('.no');
+            let x = Math.random() * (window.innerWidth - 100);
+            let y = Math.random() * (window.innerHeight - 50);
+            btnNo.style.left = x + 'px';
+            btnNo.style.top = y + 'px';
+        }
+
+        function createHearts() {
+            let container = document.querySelector('.heart-bg');
+            for (let i = 0; i < 30; i++) {
+                let heart = document.createElement('div');
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+                container.appendChild(heart);
+            }
+        }
+
+        function startRefranChange() {
+            setInterval(() => {
+                const refranElement = document.getElementById('refran');
+                refranElement.textContent = getRandomRefran();  // Cambia el refrán cada 5 segundos
+            }, 5000);  // 5000 milisegundos = 5 segundos
+        }
+
+        createHearts();
+    </script>
+
+</body>
+</html>
